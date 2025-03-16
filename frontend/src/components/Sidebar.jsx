@@ -19,13 +19,13 @@ const Sidebar = () => {
 
   if(isUserLoading) return <SidebarSkeleton/>
   return (
-    <aside className="h-screen overflow-hidden flex flex-col pb-12">
+    <aside className="h-screen overflow-hidden flex flex-col pb-12 w-full sm:w-auto">
   <div className="border-b border-base-300 w-full p-5">
     <div className="flex items-center gap-2">
       <Users className="size-6" />
-      <span className="font-medium hidden lg:block">Contacts</span>
+      <span className="font-medium lg:block">Contacts</span>
     </div>
-    <div className="mt-3 hidden lg:flex items-center gap-2">
+    <div className="mt-3 flex items-center gap-2">
       <label className="cursor-pointer flex items-center gap-2">
         <input
           type="checkbox"
@@ -51,7 +51,7 @@ const Sidebar = () => {
           ${selectedUser?._id === user._id ? "bg-base-300 ring-1 ring-base-300" : ""}
         `}
       >
-        <div className="relative mx-auto lg:mx-0 ">
+        <div className="relative sm:mx-0 ">
           <img
             src={user.profilePic || "/avatar.png"}
             alt={user.name}
@@ -65,7 +65,7 @@ const Sidebar = () => {
           )}
         </div>
 
-        <div className="hidden lg:block text-left min-w-0">
+        <div className="flex justify-between w-[80%] sm:block sm:w-auto text-left min-w-0">
           <div className="font-medium truncate">{user.fullname}</div>
           <div className="text-sm text-zinc-400">
             {onlineUsers.includes(user._id) ? "Online" : "Offline"}
