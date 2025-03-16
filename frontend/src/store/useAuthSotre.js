@@ -9,7 +9,7 @@ const BASE_URL =
 export const useAuthStore = create((set, get) => ({
   authUser: null,
   isSigningUp: false,
-  isLogginIn: false,
+  isLoggingIn: false,
   isUpdatingProfile: false,
 
   isCheckingAuth: true,
@@ -48,7 +48,7 @@ export const useAuthStore = create((set, get) => ({
   },
 
   login: async (data) => {
-    set({ isLogginIn: true });
+    set({ isLoggingIn: true });
     try {
       const res = await axiosInstance.post("/auth/login", data);
       set({ authUser: res.data });
@@ -60,7 +60,7 @@ export const useAuthStore = create((set, get) => ({
           "Login failed. Invalid Credentials (Please try again)."
       );
     } finally {
-      set({ isLogginIn: false });
+      set({ isLoggingIn: false });
     }
   },
 
