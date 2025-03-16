@@ -20,7 +20,7 @@ const Navbar = () => {
               <h1 className="text-lg font-bold">Chit-Chat</h1>
               <sub>
 
-              <p className="hidden sm:block text-primary">simple,fun and engaging</p>
+              <p className="hidden sm:block text-primary ">Simple,Fun & Engaging</p>
               </sub>
             </Link>
           </div>
