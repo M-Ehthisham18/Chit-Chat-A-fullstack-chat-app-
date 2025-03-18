@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuthStore } from "../store/useAuthSotre";
-import { Camera, Mail, User } from "lucide-react";
+import { Camera, Mail, User, Loader } from "lucide-react";
 
 const Profilepage = () => {
   const { authUser, isUpdatingProfile, updateProfile, deleteAccount, isAccountDeleting } = useAuthStore();
@@ -126,7 +126,8 @@ const Profilepage = () => {
       {/* Delete Confirmation Modal */}
       {isDeleteModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-base-300 p-6 rounded-lg shadow-lg w-96">
+          {
+            isAccountDeleting ? <Loader /> : <div className="bg-base-300 p-6 rounded-lg shadow-lg w-96">
             <h2 className="text-lg font-semibold mb-4">Confirm Account Deletion</h2>
             <p className="text-sm text-gray-600 mb-4">
               Enter your password to confirm account deletion.
@@ -156,6 +157,7 @@ const Profilepage = () => {
               </button>
             </div>
           </div>
+          }
         </div>
       )}
     </div>
