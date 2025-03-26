@@ -40,7 +40,7 @@ const Sidebar = () => {
   </div>
 
   {/* Scrollable User List */}
-  <div className="flex-1 overflow-y-auto py-3">
+  <div className="flex-1 overflow-y-auto py-3 mb-20">
     {filteredUsers.map((user) => (
       <button
         key={user._id}
