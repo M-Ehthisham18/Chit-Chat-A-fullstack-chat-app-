@@ -47,28 +47,34 @@ export const useChatStore = create((set, get) => ({
         `/messages/send/${selectedUser._id}`,
         messageData
       );
+  
+      // Ensure new message is added only once
       set({ messages: [...messages, res.data] });
+  
     } catch (error) {
       toast.error(
-        error.response.data.message || "error in sendmessage : " + error
+        error.response.data.message || "Error in sendMessage: " + error
       );
     }
   },
-
+  
   subscribeToMessages: () => {
-    const { selectedUser } = get();
-    if (!selectedUser) return;
-    const socket = useAuthStore.getState().socket;
+  const { selectedUser, messages } = get();
+  if (!selectedUser) return;
+  const socket = useAuthStore.getState().socket;
 
-    socket.on("newMessage", (newMessage) => {
-      if (newMessage.senderId !== selectedUser._id) {
-        return;
-      }
-      set({
-        messages: [...get().messages, newMessage],
-      });
-    });
-  },
+  socket.on("newMessage", (newMessage) => {
+    const existingMessage = get().messages.find(
+      (msg) => msg._id === newMessage._id
+    );
+
+    // Add message ONLY if it does not already exist
+    if (!existingMessage) {
+      set({ messages: [...get().messages, newMessage] });
+    }
+  });
+},
+  
 
   unsubscribeFromMessages: () => {
     const socket = useAuthStore.getState().socket;
